@@ -3,30 +3,35 @@ package com.redacode.redacode.model;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
-public class Employee {
+public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(nullable = false, updatable = false)
     private Long id;
     private String name;
     private String email;
-    private String jobTitle;
+    private String subject;
     private String phone;
-    private String imageUrl;
-    @Column(nullable = false, updatable = false)
 
-    private String employeeCode;
-    public Employee(){
+    @ElementCollection
+
+    private List<Long> professors = new ArrayList<Long>();
+
+
+    public Student(){
 
     }
 
-    public Employee(String name, String email, String jobTitle, String Phone, String imageUrl){
+    public Student(String name, String email, String subject, String Phone, String imageUrl, List<Long> professors){
         this.name = name;
         this.email = email;
-        this.jobTitle = jobTitle;
+        this.subject = subject;
         this.phone = phone;
-        this.imageUrl = imageUrl;
+        this.professors = professors;
     }
 
     public void setEmail(String email) {
@@ -49,16 +54,30 @@ public class Employee {
         return name;
     }
 
+    public List<Long> getProfessors() {
+        return professors;
+    }
+
+    public void setProfessors(List<Long> professors) {
+        this.professors = professors;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
     @Override
     public String toString() {
-        return "Employee{" +
+        return "Student{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
-                ", jobTitle='" + jobTitle + '\'' +
+                ", subject='" + subject + '\'' +
                 ", phone='" + phone + '\'' +
-                ", imageUrl='" + imageUrl + '\'' +
-                ", employeeCode='" + employeeCode + '\'' +
                 '}';
     }
 
@@ -66,32 +85,9 @@ public class Employee {
         return id;
     }
 
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public String getEmployeeCode() {
-        return employeeCode;
-    }
 
     public String getPhone() {
         return phone;
-    }
-
-    public void setEmployeeCode(String employeeCode) {
-        this.employeeCode = employeeCode;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
     }
 
     public void setPhone(String phone) {
